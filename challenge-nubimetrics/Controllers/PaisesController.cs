@@ -13,8 +13,8 @@ namespace challenge_nubimetrics.Controllers
     public class PaisesController : ControllerBase
     {
 
-        private readonly IPaisesService _paisesService;
-        public PaisesController(IPaisesService paisesService)
+        private readonly PaisesService _paisesService;
+        public PaisesController(PaisesService paisesService)
         {
             _paisesService = paisesService;
         }
@@ -26,8 +26,21 @@ namespace challenge_nubimetrics.Controllers
         [Produces("application/json")]
         public async Task<IActionResult> Get(string pais)
         {
+            try
+            {
+                return Ok(await _paisesService.GetPaisInfo(pais));
+            }
+            catch (ArgumentException)
+            {
 
-            return null;
+                return NotFound();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
     }
 }

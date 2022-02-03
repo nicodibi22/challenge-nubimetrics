@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace challenge_nubimetrics_services.Services
 {
-    public interface IPaisesService
+    public interface PaisesService
     {
         Task<PaisDTO> GetPaisInfo(string pais);
     }
