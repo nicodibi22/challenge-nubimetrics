@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace challenge_nubimetrics_services.ExternalModels
+namespace challenge_nubimetrics_services.ExternalModels.ML.Countries
 {
-    public class LocationML
+    public class Location
     {
         public virtual float Latitude { get; set; }
         public virtual float Longitude { get; set; }

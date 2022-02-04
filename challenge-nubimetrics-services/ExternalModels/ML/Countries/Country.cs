@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace challenge_nubimetrics_services.ExternalModels
+namespace challenge_nubimetrics_services.ExternalModels.ML.Countries
 {
     [Serializable]
-    public class CountryML
+    public class Country
     {
         [JsonProperty("id")]
         public virtual string Id { get; set; }
@@ -30,8 +30,8 @@ namespace challenge_nubimetrics_services.ExternalModels
         public virtual string Time_Zone { get; set; }
 
         [JsonProperty("geo_information")]
-        public virtual GeoInformationML Geo_Information { get; set; }
+        public virtual GeoInformation Geo_Information { get; set; }
 
-        public virtual IList<StateML> States { get; set; }
+        public virtual IList<State> States { get; set; }
     }
 }

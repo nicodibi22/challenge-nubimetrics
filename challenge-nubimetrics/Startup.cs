@@ -35,6 +35,7 @@ namespace challenge_nubimetrics
             services.AddControllers().AddNewtonsoftJson(x =>
                 x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddScoped<PaisesService, PaisesImplementation>();
+            services.AddScoped<BusquedaService, BusquedaImplementation>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
