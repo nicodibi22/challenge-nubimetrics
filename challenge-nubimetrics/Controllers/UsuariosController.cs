@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace challenge_nubimetrics.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/usuarios")]
     public class UsuariosController : ControllerBase
     {
 

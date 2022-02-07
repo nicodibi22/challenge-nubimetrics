@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace challenge_nubimetrics.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/busqueda")]
     public class BusquedaController : ControllerBase
     {
 
@@ -34,11 +34,6 @@ namespace challenge_nubimetrics.Controllers
             {
 
                 return NotFound();
-            }
-            catch (Exception)
-            {
-
-                throw;
             }
             
         }

@@ -12,7 +12,7 @@ namespace challenge_nubimetrics_models.Mappings
         public UsuarioMap()
         {
 
-            Table("Usuario2");
+            Table("Usuario");
             Id(x => x.Id).Column("Id").GeneratedBy.Identity(); ;
             Map(x => x.Nombre).Column("Nombre").Not.Nullable().Length(128);
             Map(x => x.Apellido).Column("Apellido").Not.Nullable().Length(128);

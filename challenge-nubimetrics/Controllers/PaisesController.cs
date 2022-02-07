@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace challenge_nubimetrics.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/paises")]
     public class PaisesController : ControllerBase
     {
 
