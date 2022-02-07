@@ -34,8 +34,9 @@ namespace challenge_nubimetrics_services.Implementations
         {
             try
             {
-                var usuario = _mapper.Map<UsuarioDTO, UsuarioEntity>(entry);
+                var usuario = _mapper.Map<UsuarioDTO, UsuarioEntity>(entry);                
                 usuario.Validar();
+                // falta validación de mail válido y existencia de usuario con mismo mail
                 usuario.Password = _passwordHasher.HashPassword(usuario, usuario.Password);
                 return await _repositorty.Create(usuario);
             }
@@ -77,6 +78,7 @@ namespace challenge_nubimetrics_services.Implementations
             try
             {
                 var usuario = _mapper.Map<UsuarioDTO, UsuarioEntity>(entry);
+                // falta validación de mail válido y existencia de usuario con mismo mail
                 usuario.Password = _passwordHasher.HashPassword(usuario, usuario.Password);
                 await _repositorty.Update(usuario);
             }
