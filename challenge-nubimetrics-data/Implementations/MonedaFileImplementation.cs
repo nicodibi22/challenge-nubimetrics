@@ -10,9 +10,14 @@ namespace challenge_nubimetrics_data.Implementations
 {
     public class MonedaFileImplementation : MonedaRepository
     {
+        public async Task SaveConversions(IList<MonedaEntity> monedas)
+        {
+            await FactoryWriterTextFile<IList<MonedaEntity>>.GetWriter("conversions.csv").Write(monedas);
+        }
+
         public async Task SaveRange(IList<MonedaEntity> monedas)
         {
-            await FactoryWriterTextFile.GetWriter("currencies.json").Write(monedas);
+            await FactoryWriterTextFile<IList<MonedaEntity>>.GetWriter("currencies.json").Write(monedas);
         }
     }
 }

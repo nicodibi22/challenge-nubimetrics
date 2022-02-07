@@ -6,18 +6,20 @@ using System.Threading.Tasks;
 
 namespace challenge_nubimetrics_data.Utils
 {
-    public class CsvWriterFile : WriterTextFile
+    public class CsvWriterFile<T> : WriterTextFile
     {
         private string _fileName;
-        public CsvWriterFile(string fileName)
+        StrategyCsvWriter _strategyCsvWriter;
+        public CsvWriterFile(string fileName, StrategyCsvWriter strategyCsvWriter)
         {
             _fileName = fileName;
+            _strategyCsvWriter = strategyCsvWriter;
+
         }
         public async Task Write<T>(T content)
         {
-            var csv = new StringBuilder();            
-            csv.AppendLine("");
-            File.WriteAllText(_fileName, csv.ToString());
+            File.WriteAllText(".//Adjuntos/" + _fileName, _strategyCsvWriter.Write(content));
         }
+
     }
 }

@@ -9,5 +9,6 @@ namespace challenge_nubimetrics_data.Repositories
     public interface MonedaRepository
     {
         Task SaveRange(IList<MonedaEntity> monedas);
+        Task SaveConversions(IList<MonedaEntity> monedas);
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace challenge_nubimetrics_data.Utils
 {
-    public class JsonWriterFile : WriterTextFile
+    public class JsonWriterFile<T> : WriterTextFile
     {
         private string _fileName;
         public JsonWriterFile(string fileName)

@@ -26,24 +26,41 @@ namespace challenge_nubimetrics_services.Implementations
                     .ForMember(x => x.Descripcion, opt => opt.MapFrom(y => y.Description))
                     .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
                     .ForMember(x => x.Simbolo, opt => opt.MapFrom(y => y.Symbol));
-                cfg.CreateMap<CurrencyConversion, MonedaConversionEntity>();
-                
+                cfg.CreateMap<CurrencyConversion, MonedaConversionEntity>()
+                    .ForMember(x => x.Fecha_Creacion, opt => opt.MapFrom(y => y.Creation_Date))
+                    .ForMember(x => x.Moneda_Base, opt => opt.MapFrom(y => y.Currency_Base))
+                    .ForMember(x => x.Moneda_Cotizacion, opt => opt.MapFrom(y => y.Currency_Quote))
+                    .ForMember(x => x.Proporcion, opt => opt.MapFrom(y => y.Ratio))
+                    .ForMember(x => x.Tarifa, opt => opt.MapFrom(y => y.Rate))
+                    .ForMember(x => x.Proporcion_Inversa, opt => opt.MapFrom(y => y.Inv_Rate))
+                    .ForMember(x => x.Valido_Hasta, opt => opt.MapFrom(y => y.Valid_Until));
+
             }
             );
             _mapper = config.CreateMapper();
         }
         public async Task Procesar()
         {
-            var listCurrencies = await GetResultFromApi();
+            var listCurrencies = await GetListCurrenciesFromApi();
+            foreach (var currency in listCurrencies)
+            {
+                currency.Pasaje_Dolar = await GetCurrencyToDolarFromApi(currency.Id);
+            }
             await _monedaRepository.SaveRange(listCurrencies);
-            //FactoryWriterTextFile.GetWriter("currencies.json").Write(listCurrencies);
+            await _monedaRepository.SaveConversions(listCurrencies);
         }
 
-        private async Task<IList<MonedaEntity>> GetResultFromApi()
+        private async Task<IList<MonedaEntity>> GetListCurrenciesFromApi()
         {
             string url = "https://api.mercadolibre.com/currencies/";
             string parameters = null;
             return _mapper.Map<IList<Currency>, IList<MonedaEntity>>(await RestApiCaller.GetRequest<IList<Currency>>(url, parameters));
+        }
+        private async Task<MonedaConversionEntity> GetCurrencyToDolarFromApi(string country)
+        {
+            string url = "https://api.mercadolibre.com/currency_conversions/search";
+            string parameters = "?from=" + country + "&to=USD";
+            return _mapper.Map<CurrencyConversion, MonedaConversionEntity>(await RestApiCaller.GetRequest<CurrencyConversion>(url, parameters));
         }
     }
 }

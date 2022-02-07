@@ -28,7 +28,7 @@ namespace challenge_nubimetrics_services.Utils
                     return JsonConvert.DeserializeObject<T>(dataObjects);
                 }                
                 else
-                    throw new Exception("");
+                    return default(T);
             }
             catch (Exception ex)
             {
