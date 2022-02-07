@@ -15,7 +15,8 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
-
+using challenge_nubimetrics_data.Repositories;
+using challenge_nubimetrics_data.Implementations;
 
 namespace challenge_nubimetrics
 {
@@ -34,8 +35,10 @@ namespace challenge_nubimetrics
             //services.AddControllers();
             services.AddControllers().AddNewtonsoftJson(x =>
                 x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            services.AddScoped<PaisesService, PaisesImplementation>();
+            services.AddScoped<PaisService, PaisImplementation>();
             services.AddScoped<BusquedaService, BusquedaImplementation>();
+            services.AddScoped<MonedaService, MonedaImplementation>();
+            services.AddScoped<MonedaRepository, MonedaFileImplementation>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,25 +10,25 @@ namespace challenge_nubimetrics.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PaisesController : ControllerBase
+    public class MonedasController : ControllerBase
     {
 
-        private readonly PaisService _paisesService;
-        public PaisesController(PaisService paisesService)
+        private readonly MonedaService _monedaService;
+        public MonedasController(MonedaService monedaService)
         {
-            _paisesService = paisesService;
+            _monedaService = monedaService;
         }
 
-        [HttpGet("{pais}")]
+        [HttpGet]
         [ProducesResponseType(200)]
-        [ProducesResponseType(401)]
         [ProducesResponseType(404)]
         [Produces("application/json")]
         public async Task<IActionResult> Get(string pais)
         {
             try
             {
-                return Ok(await _paisesService.GetPaisInfo(pais));
+                await _monedaService.Procesar();
+                return Ok();
             }
             catch (ArgumentException)
             {

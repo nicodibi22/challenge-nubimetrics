@@ -15,5 +15,9 @@
     <ProjectReference Include="..\challenge-nubimetrics-services\challenge-nubimetrics-services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Adjuntos\" />
+  </ItemGroup>
+
 
 </Project>

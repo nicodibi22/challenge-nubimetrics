@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "challenge-nubimetrics", "challenge-nubimetrics\challenge-nubimetrics.csproj", "{F8D24C09-B0FB-46DD-8879-4A1596448A79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "challenge-nubimetrics", "challenge-nubimetrics\challenge-nubimetrics.csproj", "{F8D24C09-B0FB-46DD-8879-4A1596448A79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "challenge-nubimetrics-services", "challenge-nubimetrics-services\challenge-nubimetrics-services.csproj", "{7F2C0986-D90A-4164-90BE-D76EFB1448F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "challenge-nubimetrics-services", "challenge-nubimetrics-services\challenge-nubimetrics-services.csproj", "{7F2C0986-D90A-4164-90BE-D76EFB1448F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "challenge-nubimetrics-data", "challenge-nubimetrics-data\challenge-nubimetrics-data.csproj", "{0CFA258E-6C72-431B-8B2C-912FDD0586B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "challenge-nubimetrics-models", "challenge-nubimetrics-model\challenge-nubimetrics-models.csproj", "{59ED6619-F4F8-4DC5-BDD7-7389078BC288}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{7F2C0986-D90A-4164-90BE-D76EFB1448F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F2C0986-D90A-4164-90BE-D76EFB1448F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F2C0986-D90A-4164-90BE-D76EFB1448F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CFA258E-6C72-431B-8B2C-912FDD0586B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CFA258E-6C72-431B-8B2C-912FDD0586B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CFA258E-6C72-431B-8B2C-912FDD0586B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CFA258E-6C72-431B-8B2C-912FDD0586B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59ED6619-F4F8-4DC5-BDD7-7389078BC288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59ED6619-F4F8-4DC5-BDD7-7389078BC288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59ED6619-F4F8-4DC5-BDD7-7389078BC288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59ED6619-F4F8-4DC5-BDD7-7389078BC288}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

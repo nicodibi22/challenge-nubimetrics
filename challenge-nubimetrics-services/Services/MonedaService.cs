@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace challenge_nubimetrics_services.Services
 {
-    public interface PaisesService
+    public interface MonedaService
     {
-        Task<PaisDTO> GetPaisInfo(string pais);
+        Task Procesar();
     }
 }

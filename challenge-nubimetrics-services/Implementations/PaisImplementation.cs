@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace challenge_nubimetrics_services.Implementations
 {
-    public class PaisesImplementation : PaisesService
+    public class PaisImplementation : PaisService
     {
         private readonly IMapper _mapper;
-        public PaisesImplementation()
+        public PaisImplementation()
         {
             var config = new MapperConfiguration(cfg =>
             {
