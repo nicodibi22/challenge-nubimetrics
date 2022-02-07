@@ -19,26 +19,25 @@ namespace challenge_nubimetrics.Controllers
             _monedaService = monedaService;
         }
 
-        [HttpGet]
+        [HttpPost]
         [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [Produces("application/json")]
-        public async Task<IActionResult> Get(string pais)
+        public async Task<IActionResult> Procesar()
         {
             try
             {
                 await _monedaService.Procesar();
                 return Ok();
             }
-            catch (ArgumentException)
+            catch (ArgumentException ex)
             {
-
-                return NotFound();
+                return BadRequest(new { message = ex.Message});
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return NotFound(new { message = ex.Message });
             }
             
         }
