@@ -1,4 +1,5 @@
 ﻿using challenge_nubimetrics_services.Services;
+using challenge_nubimetrics_services.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -30,15 +31,13 @@ namespace challenge_nubimetrics.Controllers
             {
                 return Ok(await _paisesService.GetPaisInfo(pais));
             }
-            catch (ArgumentException)
+            catch (UnauthorizedException)
             {
-
-                return NotFound();
+                return Unauthorized(new {message = "error 401 unauthorized de http" });
             }
-            catch (Exception)
+            catch (NotFoundException)
             {
-
-                throw;
+                return NotFound();
             }
             
         }

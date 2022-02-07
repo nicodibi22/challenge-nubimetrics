@@ -4,9 +4,11 @@ using challenge_nubimetrics_services.ExternalModels;
 using challenge_nubimetrics_services.ExternalModels.ML.Countries;
 using challenge_nubimetrics_services.Services;
 using challenge_nubimetrics_services.Utils;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace challenge_nubimetrics_services.Implementations
@@ -14,8 +16,10 @@ namespace challenge_nubimetrics_services.Implementations
     public class PaisImplementation : PaisService
     {
         private readonly IMapper _mapper;
-        public PaisImplementation()
+        private AppSettings _appSettings;
+        public PaisImplementation(IOptions<AppSettings> settings)
         {
+            _appSettings = settings.Value;
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Country, PaisDTO>()
@@ -49,17 +53,19 @@ namespace challenge_nubimetrics_services.Implementations
 
         private void PaisAutorizado(string pais)
         {
-            return;
+            if (!_appSettings.Paises.FirstOrDefault(p => p.Id == pais).Habilitado)
+                throw new UnauthorizedException();
         }
 
         private void PaisExistente(string pais)
         {
-            return;
+            if (_appSettings.Paises.FirstOrDefault(p => p.Id == pais) == null)
+                throw new NotFoundException();
         }
 
         private async Task<PaisDTO> GetPaisInfoFromApi(string pais)
         {
-            string url = "https://api.mercadolibre.com/classified_locations/countries/" + pais;
+            string url = _appSettings.MLEndpoints.Paises + pais;
             string parameters = "";
             return _mapper.Map<Country, PaisDTO>(await RestApiCaller.GetRequest <Country>(url, parameters));
         }

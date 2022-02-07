@@ -3,6 +3,7 @@ using challenge_nubimetrics_services.DTOs;
 using challenge_nubimetrics_services.ExternalModels.ML.Search;
 using challenge_nubimetrics_services.Services;
 using challenge_nubimetrics_services.Utils;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,8 +14,10 @@ namespace challenge_nubimetrics_services.Implementations
     public class BusquedaImplementation : BusquedaService
     {
         private readonly IMapper _mapper;
-        public BusquedaImplementation()
+        private AppSettings _appSettings;
+        public BusquedaImplementation(IOptions<AppSettings> settings)
         {
+            _appSettings = settings.Value;
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap <Search, BusquedaDTO>();
@@ -35,7 +38,7 @@ namespace challenge_nubimetrics_services.Implementations
 
         private async Task<BusquedaDTO> GetResultFromApi(string termino)
         {
-            string url = "https://api.mercadolibre.com/sites/MLA/search" ;
+            string url = _appSettings.MLEndpoints.Busqueda;
             string parameters = "?q=" + termino;
             return _mapper.Map<Search, BusquedaDTO>(await RestApiCaller.GetRequest <Search>(url, parameters));
         }

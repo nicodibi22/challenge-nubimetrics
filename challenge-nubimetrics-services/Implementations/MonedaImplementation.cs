@@ -5,6 +5,7 @@ using challenge_nubimetrics_services.DTOs;
 using challenge_nubimetrics_services.ExternalModels.ML.Currencies;
 using challenge_nubimetrics_services.Services;
 using challenge_nubimetrics_services.Utils;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,9 +17,11 @@ namespace challenge_nubimetrics_services.Implementations
     {
         private readonly IMapper _mapper;
         private readonly MonedaRepository _monedaRepository;
-        public MonedaImplementation(MonedaRepository monedaRepository)
+        private AppSettings _appSettings;
+        public MonedaImplementation(MonedaRepository monedaRepository, IOptions<AppSettings> settings)
         {
             _monedaRepository = monedaRepository;
+            _appSettings = settings.Value;
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Currency, MonedaEntity>()
@@ -52,13 +55,13 @@ namespace challenge_nubimetrics_services.Implementations
 
         private async Task<IList<MonedaEntity>> GetListCurrenciesFromApi()
         {
-            string url = "https://api.mercadolibre.com/currencies/";
+            string url = _appSettings.MLEndpoints.Monedas;
             string parameters = null;
             return _mapper.Map<IList<Currency>, IList<MonedaEntity>>(await RestApiCaller.GetRequest<IList<Currency>>(url, parameters));
         }
         private async Task<MonedaConversionEntity> GetCurrencyToDolarFromApi(string country)
         {
-            string url = "https://api.mercadolibre.com/currency_conversions/search";
+            string url = _appSettings.MLEndpoints.MonedasConversion;
             string parameters = "?from=" + country + "&to=USD";
             return _mapper.Map<CurrencyConversion, MonedaConversionEntity>(await RestApiCaller.GetRequest<CurrencyConversion>(url, parameters));
         }

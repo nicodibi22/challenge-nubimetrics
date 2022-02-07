@@ -20,6 +20,7 @@ using challenge_nubimetrics_data.Implementations;
 using Microsoft.AspNetCore.Identity;
 using challenge_nubimetrics_data.Utils;
 using challenge_nubimetrics.Middlewares;
+using challenge_nubimetrics_services.Utils;
 
 namespace challenge_nubimetrics
 {
@@ -38,6 +39,8 @@ namespace challenge_nubimetrics
             services.AddControllers().AddNewtonsoftJson(x =>
                 x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
 
             // Esto debiera sacarse y ponerse en una clase que lo resuelva
             #region Dependency Injection
